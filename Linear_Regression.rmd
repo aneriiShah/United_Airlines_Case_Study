@@ -1,0 +1,33 @@
+---
+title: "United_Airlines_Linear_Regression"
+author: "Aneri Shah"
+date: "2/22/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{read data}
+united_data <- read.csv("United_updated_data.csv")
+```
+
+
+```{r}
+model <- lm(formula = PHYSHLTH~., data = united_data)
+summary(model)
+```
+
+```{r}
+#Rerieving only important predictor variables
+imp_vars <- united_data[c("X_STATE","MENTHLTH","PERSDOC2","CHECKUP1",
+                          "NUMHHOL2","INTERNET","INSULIN","DELAYMED",
+                          "X_IMPNPH","X_RFHLTH","X_TOTINDA","X_ASTHMS1",
+                          "X_ALTETH2","X_RACE_G1","X_AGE_G","DRNKANY5","X_FLSHOT6",
+                          "TOT_DFFCLTY_TSKS","TOT_CHRNC","PHYSHLTH")]
+
+```
+```{r}
+#Running the model again after removing insignificant variables 
+model_new <- lm(formula = PHYSHLTH~.,data=imp_vars)
+summary(model_new)
+```
